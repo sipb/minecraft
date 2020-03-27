@@ -1,0 +1,6 @@
+[Unit]
+Description=HTTP Redirect
+
+[Service]
+ExecStart=/usr/bin/redir --lport=80 --cport=80 --caddr=sipb.github.io
+#ExecStart=/usr/bin/redir --lport=80 --cport=80 --caddr=scripts-vhosts.mit.edu
