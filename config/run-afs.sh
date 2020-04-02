@@ -29,19 +29,21 @@ while [ $kstartret -ne 0 ]; do
     aklog -c sipb
 	RETENTION='5D'
 
-    ROOT="/home/minecraft/mit-server/mitworld"
+    ROOT="/home/minecraft/mit-server"
     BACKUP_ROOT="/afs/sipb/project/minecraft/backups/creative"
 
-	mkdir -p "$BACKUP_ROOT"
+    mkdir -p "$BACKUP_ROOT"
 
     cd "$ROOT"
-    rdiff-backup "$ROOT" "$BACKUP_ROOT"
-    rdiff-backup --force --remove-older-than "$RETENTION" "$BACKUP_ROOT" >/dev/null
+    for dir in mitworld mitworld_nether; do
+        rdiff-backup "$ROOT/$dir" "$BACKUP_ROOT/$dir"
+        rdiff-backup --force --remove-older-than "$RETENTION" "$BACKUP_ROOT/$dir" >/dev/null
+    done
 
 	# Okay, we're all done. Kill k5start
 	kill -TERM $(cat "$kstartpid")
 	exit 0
-    ) 200> /var/lock/backup-ng.lock
+    ) 200> /home/minecraft/.lock/backup-ng.lock
     kstartret=$?
 done
 
