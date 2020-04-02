@@ -20,4 +20,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-00 * * * * tar -czvf $HOME/mit-server/backups/`date +\%Y-\%m-\%d-\%H`.tar.gz $HOME/mit-server/mitworld/
+00 * * * * $HOME/minecraft/run-afs.sh
