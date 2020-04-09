@@ -1,0 +1,12 @@
+#form-container {
+    text-align: center;
+    max-width: 90em;
+}
+
+#btn-login {
+    cursor:pointer;
+}
+
+#btn-login:hover {
+    border-width: 5px;
+}

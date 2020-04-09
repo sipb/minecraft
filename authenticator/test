@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"kerberos":"alexh9","username":"lpbug"}' \
+  localhost:3020/users/add_record

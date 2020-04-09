@@ -3,76 +3,78 @@
  * state and an API for clients 
  *
  * Requires SQL connection object to be passed in
+ * Requires kerberos to be valid since it should be obtained via signed cert
+ *
+ * Special thanks to Diane Zhou for delivering me food while I wrote this
  */
 
 module.exports = (function(con) {
   const router = require('express').Router(),
-  moment = require('moment');
+        fetch = require('node-fetch'),
+        moment = require('moment'),
+        colors = require('colors');
+
+  const HTTP_GOOD = 200,
+        HTTP_BAD_REQUEST = 400,
+        HTTP_NOT_FOUND = 404,
+        HTTP_SERVER_ERROR = 500;
 
   /*
-   * Gets user's DB record by kerberos
-   * Returns a object with status of query and SQL record object, if found
+   * Insert a record into database asynchronusly
    */
-  function getRecordByKerberos(kerberos){}
-
-  /*
-   * Gets user's Minecraft UUID from DB
-   * Returns an object with status of query and UUID, if found
-   */
-  function getUUIDByKerberos(kerberos){}
-
-  /*
-   * Gets user's current Minecraft username 
-   * Returns an object with status of query and MC username, if found
-   */
-  function getUserNameByUUID(uuid) {}
-
-  /*
-   * Insert a record into database
-   */
-  function insertRecord(kerberos, uuid, req, res){
+  function insertRecord(kerberos, uuid, res){
     con.query(
       'INSERT INTO `minecraft_users` SET kerberos= ?, uuid = ?, time = ?',
-      [kerberos, uuid, '0'],
+      [kerberos, uuid, moment().unix()],
       function(err, results, field) {
-        // TODO think about whether this is correct err handling behavior
         if (err) {
           if (err.code === 'ER_DUP_ENTRY') {
-            console.log("UUID is already in DB");
+            console.error(colors.red("UUID", uuid, "already exists in DB"));
+            res.sendStatus(HTTP_BAD_REQUEST);
           } else {
-            console.log(err);
-            throw err;
+            console.error(colors.red(err));
+            res.sendStatus(HTTP_SERVER_ERROR);
           }
-          res.sendStatus(400);
         } else { 
           console.log('Successfully added record for', kerberos);
+          res.sendStatus(HTTP_GOOD);
         }
       }
     );
   }
 
   /*
-   * Update a record in the database
+   * API call to playerDB to get player UUID
+   *
+   * returns a promise with the response JSON
+   */
+  function fetchUUID(username) {
+    return fetch('https://playerdb.co/api/player/minecraft/' + username)
+      .then(res => res.json());
+  }
+
+  /*
+   * Update a record in the database asynchronously
    *
    * Assumes that only one record exists in the DB
    */
-  function updateRecord(kerberos, uuid, req, res){
+  function updateRecord(kerberos, uuid, res){
     con.query(
       'UPDATE `minecraft_users` SET uuid = ?, time = ? WHERE kerberos = ?',
-      [uuid, '0', kerberos],
+      [uuid, moment().unix(), kerberos],
       function(err, results, field) {
         // TODO think about whether this is correct err handling behavior
         if (err) {
           if (err.code === 'ER_DUP_ENTRY') {
-            console.log("UUID is already in DB");
+            console.error(colors.red("UUID", uuid, "exists in DB"));
+            res.sendStatus(HTTP_BAD_REQUEST);
           } else {
-            console.log(err);
-            throw err;
+            console.error(colors.red(err));
+            res.sendStatus(HTTP_SERVER_ERROR);
           }
-          res.sendStatus(400);
         } else { 
           console.log('Successfully updated record for', kerberos);
-          res.sendStatus(200);
+          res.sendStatus(HTTP_GOOD);
         }
       }
     );
@@ -89,14 +91,15 @@ module.exports = (function(con) {
       kerberos, 
       function(err, results, fields) {
         if(err) {
+          res.send(HTTP_SERVER_ERROR);
         } else {
           if (results.length) {
             //send record back in json
-            console.log(JSON.stringify(results[0]));
-            res.sendStatus(200);
+            let record = JSON.stringify(results[0]);
+            res.send(record);
           } else {
             // no result
-            res.sendStatus(404);
+            res.sendStatus(HTTP_NOT_FOUND);
           }
         }
 
@@ -109,29 +112,46 @@ module.exports = (function(con) {
    */
   router.post('/add_record', function(req, res){
     let kerberos = req.body.kerberos,
-        uuid = req.body.uuid;
-    //TODO fetch UUID
-    console.log(req.body);
-    //TODO sanitize user input
-    con.query(
-      'SELECT 1 FROM  `minecraft_users` WHERE kerberos = ?',
-      kerberos,
-      function(err, results, field) {
-        // TODO handle error
-        if(err) {
-        }
-        console.log(results);
-        if (results.length) {
-          // Update
-          console.log("Updating record for:", kerberos);
-          updateRecord(kerberos, uuid, req, res);
-        } else {
-          // Insert
-          console.log("Adding record for:", kerberos);
-          insertRecord(kerberos, uuid, req, res);
-        }
+        username = encodeURI(req.body.username); //encode to prevent injection
+
+    console.log("Got request to add record:", req.body);
+    //fetch UUID
+    console.log("Fetching UUID for", kerberos);
+    fetchUUID(username).then(function(player_json){
+      let fetch_status = player_json.success;
+      if (fetch_status) {
+        let uuid = player_json.data.player.id;
+        console.log(colors.green(
+          "Found UUID", uuid, "for", kerberos)
+        );
+        // DB operations
+        con.query(
+          'SELECT 1 FROM  `minecraft_users` WHERE kerberos = ?',
+          kerberos,
+          function(err, results, field) {
+            if(err) {
+              res.sendStatus(HTTP_SERVER_ERROR);
+            } else {
+              if (results.length) {
+                // Update
+                console.log("Updating record for:", kerberos);
+                updateRecord(kerberos, uuid, res);
+              } else {
+                // Insert
+                console.log("Adding record for:", kerberos);
+                insertRecord(kerberos, uuid, res);
+              }
+            }
+          }
+        );
+      } else {
+        // Bad MC username
+        console.log(colors.yellow(
+          "Unable to find minecraft username:", username, "for", kerberos
+        ));
+        res.sendStatus(HTTP_BAD_REQUEST);
       }
-    );
+    })
   });
 
   return router;

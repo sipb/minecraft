@@ -9,11 +9,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href="style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
 </head>
 
 <body>
 
-  <h3>MIT Minecraft Authenticator</h3>
+  <div id="form-container">
+    <div>
+      <h3>MIT Minecraft Authenticator</h3>
+      <img height="50%" width="50%" src="minecraft-auth-logo.jpg">
+    </div>
+    <div>
+      <p>
+        Please read the community guideline:
+      </p>
+      <p>
+        Notes: Currently, we require an MIT certificate to request permission
+        automatically. Please use the Google Chrome browser.
+      </p>
+    </div>
+    <div>
+      <button class='outline' id="btn-login" onclick="makeHTTPS()">
+        Login with MIT Certificate
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function makeHTTPS() {
+      //TODO DEBUG ONLY, remove this in production
+      window.location.href = "https://localhost:3080";
+      //if(location.protocol !== "https:") {
+      //  location.protocol = "https:";
+      //}
+    }
+  </script>
 
   <!--script src="js/script.js"></script-->
 </body>

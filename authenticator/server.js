@@ -5,8 +5,10 @@
 
 const express = require('express'),
       app = express(),
+      appHTTP = express(), // supports serving unsecured public page
       fs = require('fs'),
-      http = require('http').Server(app),
+      http = require('http').Server(appHTTP),
+      https = require('https').Server(app),
       morgan = require('morgan');
       bodyParser = require('body-parser'),
       sql = require('mysql');
@@ -25,7 +27,7 @@ const users = require('./users.js')(con);
 
 app.use(morgan(config.LOG_LEVEL));
 // serve HTML from views directory
-app.use(express.static('views'));
+appHTTP.use(express.static('views'));
 app.use(bodyParser.json());
 // all client calls to /user will go to users module
 app.use('/users', users); 
@@ -45,7 +47,9 @@ con.on('error', function(err){
 });
 
 http.listen(
-  config.PORT, 
+  config.HTTP_PORT, 
   console.log("Server started, accepting requests on port:", 
-  config.PORT)
+  config.HTTP_PORT)
 );
+
+https.listen(config.HTTPS_PORT);
