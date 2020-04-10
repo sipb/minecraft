@@ -21,6 +21,7 @@ kstartpid=$(mktemp /tmp/backup-ng-k5start.XXXXXXXXXX)
 kstartret=1
 
 while [ $kstartret -ne 0 ]; do
+    echo "trying";
     (
 	flock --exclusive 200
 	k5start -f /etc/daemon.keytab -u daemon/froyo-machine.mit.edu -t -K 15 -l6h -b -p "$kstartpid" || exit 1
@@ -29,15 +30,17 @@ while [ $kstartret -ne 0 ]; do
     aklog -c sipb
 	RETENTION='5D'
 
-    ROOT="/home/minecraft/mit-server"
+    ROOT="/home/minecraft/creative"
     BACKUP_ROOT="/afs/sipb/project/minecraft/backups/creative"
 
     mkdir -p "$BACKUP_ROOT"
 
     cd "$ROOT"
-    for dir in mitworld mitworld_nether; do
-        rdiff-backup "$ROOT/$dir" "$BACKUP_ROOT/$dir"
-        rdiff-backup --force --remove-older-than "$RETENTION" "$BACKUP_ROOT/$dir" >/dev/null
+    for dir in mitworld; do
+        echo "Backing up $dir"
+        rdiff-backup "$ROOT/$dir" "$BACKUP_ROOT/$dir" || echo "Failed to backup"
+        rdiff-backup --force --remove-older-than "$RETENTION" "$BACKUP_ROOT/$dir" >/dev/null || "Failed to purge old backups"
+        echo "Done Backing up $dir"
     done
 
 	# Okay, we're all done. Kill k5start

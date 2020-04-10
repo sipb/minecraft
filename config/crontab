@@ -20,4 +20,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-50 * * * * $HOME/minecraft/config/run-afs.sh >> /tmp/afs.txt 2>> /tmp/afserr.txt
+16 * * * * /etc/run-afs.sh >> /tmp/afs.txt 2>> /tmp/afserr.txt

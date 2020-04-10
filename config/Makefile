@@ -1,3 +1,6 @@
+backup: crontab run-afs.sh
+	sudo cp run-afs.sh /etc/run-afs.sh
+	sudo crontab ./crontab
 
 
 redir: http-redir.service https-redir.service
