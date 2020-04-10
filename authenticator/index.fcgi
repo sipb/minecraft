@@ -1,14 +1,16 @@
+#!/usr/bin/node
 /**
  * Author: Alex Huang (alexh95@mit.edu)
  * Created: 4/4/2020
  */
 
+var fcgi = require('node-fastcgi');
+
 const express = require('express'),
       app = express(),
       appHTTP = express(), // supports serving unsecured public page
+      http = fcgi.createServer(appHTTP),
       fs = require('fs'),
-      http = require('http').Server(appHTTP),
-      https = require('https').Server(app),
       morgan = require('morgan');
       bodyParser = require('body-parser'),
       sql = require('mysql');
@@ -45,11 +47,6 @@ con.on('error', function(err){
   console.log("Error is:", err);
   throw err;
 });
+http.listen();
 
-http.listen(
-  config.HTTP_PORT, 
-  console.log("Server started, accepting requests on port:", 
-  config.HTTP_PORT)
-);
-
-https.listen(config.HTTPS_PORT);
+//https.listen(config.HTTPS_PORT);
