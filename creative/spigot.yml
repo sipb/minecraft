@@ -60,6 +60,7 @@ stats:
   forced-stats: {}
 world-settings:
   default:
+    seed-endcity: 10387313
     verbose: true
     mob-spawn-range: 6
     hopper-amount: 1
