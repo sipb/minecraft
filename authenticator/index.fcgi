@@ -29,7 +29,20 @@ const users = require('./users.js')(con);
 
 app.use(morgan(config.LOG_LEVEL));
 // serve HTML from views directory
-appHTTP.use(express.static('views'));
+
+//appHTTP.use(express.static('views'));
+appHTTP.get('/', function (req, res) {
+
+//socket.getPeerCertificate()
+    if ('SSL_CLIENT_S_DN_Email' in req.socket.params) {
+        res.send(req.socket.params.SSL_CLIENT_S_DN_Email);
+    } else {
+        res.send("no certificate, please visit https://minecraft.scripts.mit.edu:444");
+    }
+//   res.send(JSON.stringify(req.socket.params));//'Hello World');
+});
+
+  
 app.use(bodyParser.json());
 // all client calls to /user will go to users module
 app.use('/users', users); 
