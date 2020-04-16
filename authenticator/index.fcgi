@@ -9,8 +9,10 @@ var fcgi = require('node-fastcgi');
 const express = require('express'),
       app = express(),
       appHTTP = express(), // supports serving unsecured public page
-      http = fcgi.createServer(appHTTP),
       fs = require('fs'),
+//      http = fcgi.createServer(appHTTP),
+      http = require('http'),
+      https = require('https'),
       morgan = require('morgan');
       bodyParser = require('body-parser'),
       sql = require('mysql');
@@ -24,15 +26,39 @@ const con = sql.createConnection({
   database : config.SQL_DB_NAME_TEST
 });
 
+const credentials = {
+  key: fs.readFileSync(config.PRIVATE_KEY, 'utf8'),
+  cert: fs.readFileSync(config.CERT, 'utf8'),
+  ca: fs.readFileSync(config.CA, 'utf8'),
+  requestCert: true,
+  rejectUnauthorized: true
+};
+
+const httpServer = http.createServer(appHTTP),
+      httpsServer = https.createServer(credentials, app)
+
 // Users route, interface for all user DB interactions
 const users = require('./users.js')(con);
 
+// the public page, no cert required
+appHTTP.use(express.static('views/public'));
+
+// the private page/form, requires cert and HTTPS
+app.use(express.static('views/private'));
 app.use(morgan(config.LOG_LEVEL));
 // serve HTML from views directory
-appHTTP.use(express.static('views'));
 app.use(bodyParser.json());
 // all client calls to /user will go to users module
 app.use('/users', users); 
+
+// handle errors, respond to client
+app.use((err, req, res, next) => {
+  if (err) {
+    console.log(err);
+    return res.sendStatus(500);
+  }
+  next();
+});
 
 con.connect(function(err){
   if (err) throw err;
@@ -47,6 +73,13 @@ con.on('error', function(err){
   console.log("Error is:", err);
   throw err;
 });
-http.listen();
 
-//https.listen(config.HTTPS_PORT);
+//http.listen();
+
+httpServer.listen(
+  config.HTTP_PORT, 
+  console.log("Server started, accepting requests on port:", 
+  config.HTTP_PORT)
+);
+
+httpsServer.listen(config.HTTPS_PORT);

@@ -1,0 +1,47 @@
+#form-container {
+    text-align: center;
+    max-width: 90em;
+    margin: auto;
+}
+
+#btn-login {
+    cursor:pointer;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+#btn-login:hover {
+    border-width: 5px;
+}
+
+#form-box {
+  font-size: 3rem;
+  font-weight: 200;
+}
+
+#username-box {
+  width: 33%;
+}
+
+#new-registration {
+  display: none;
+}
+
+#existing-registration {
+  display: none;
+}
+
+#submission-form {
+  display: none;
+}
+
+#greeting {
+  display: none;
+}
+
+#error-container {
+  color:lightcoral;
+
+}

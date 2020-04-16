@@ -1,0 +1,12 @@
+# OS X specific files
+.DS_Store
+
+# Build specific files
+node_modules/
+
+# Sensitive files
+config.json
+*.pem
+
+# Other stuff
+*.swp

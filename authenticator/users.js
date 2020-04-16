@@ -45,12 +45,38 @@ module.exports = (function(con) {
 
   /*
    * API call to playerDB to get player UUID
+   * assumes username to be non empty
    *
-   * returns a promise with the response JSON
+   * returns a promise of the response JSON
    */
   function fetchUUID(username) {
     return fetch('https://playerdb.co/api/player/minecraft/' + username)
-      .then(res => res.json());
+      .then(res => res.json())
+      .catch(err => {
+        console.log("playerDB API error while fetching UUID".red);
+      });
+  }
+
+  /*
+   * API call to playerDB to get player username record
+   *
+   * returns a promise of the response JSON
+   */
+  function fetchUsername(uuid) {
+    return fetch('https://playerdb.co/api/player/minecraft/' + uuid)
+      .then(res => res.json())
+      .catch(err => {
+        console.log("playerDB API error while fetching MC Username".red);
+      });
+  }
+
+  /*
+   * Helper function to get kerberos
+   */
+  function getKerberos(req) {
+    const subject = req.socket.getPeerCertificate().subject,
+          kerberos = subject.emailAddress.split("@")[0];
+    return kerberos;
   }
 
   /*
@@ -81,10 +107,52 @@ module.exports = (function(con) {
   }
 
   /*
+   * Route for clients to ping the server and get their own kerberos
+   */
+  router.get('/get_kerb', function (req, res) {
+    const kerberos = getKerberos(req);
+    console.log("Got an initial request from:", kerberos);
+    res.json({kerberos});
+  });
+
+  /*
+   * Route for clients to check their minecraft username
+   */
+  router.post('/check_username', function (req, res) {
+    const username = req.body.username,
+          kerberos = getKerberos(req);
+
+    if (username == undefined || 
+        username.length < 3 || username.length > 16) {
+      res.sendStatus(HTTP_BAD_REQUEST);
+      return;
+    }
+
+    fetchUUID(username)
+      .then(function(player_json){
+        let fetch_status = player_json.success;
+        if (fetch_status) {
+          console.log(colors.green(
+            "Confirmed correct MC username:", username, "for", kerberos)
+          );
+        } else {
+          console.log(colors.red(
+            "Unable to find invalid MC username:", username, "for", kerberos)
+          );
+        }
+        res.json({"status": fetch_status});
+      })
+      .catch(err => {
+        console.log(colors.red(err));
+        res.sendStatus(HTTP_SERVER_ERROR);
+      });
+  });
+
+  /*
    * Route for clients to GET their UUID
    */
-  router.post('/find_record', function(req, res){
-    let kerberos = req.body.kerberos;
+  router.get('/find_record', function(req, res){
+    let kerberos = getKerberos(req);
     console.log("Finding record for", kerberos);
     con.query(
       'SELECT uuid, time FROM  `minecraft_users` WHERE kerberos = ?',
@@ -95,8 +163,16 @@ module.exports = (function(con) {
         } else {
           if (results.length) {
             //send record back in json
-            let record = JSON.stringify(results[0]);
-            res.send(record);
+            //let record = JSON.stringify(results[0]);
+            let record = results[0];
+            fetchUsername(record.uuid).then((lookup) =>{
+              if (lookup.success) {
+                record['username'] = lookup.data.player.username;
+                res.json(record);
+              } else {
+                res.sendStatus(HTTP_NOT_FOUND);
+              }
+            });
           } else {
             // no result
             res.sendStatus(HTTP_NOT_FOUND);
@@ -111,7 +187,7 @@ module.exports = (function(con) {
    * Route for clients to POST permission requests
    */
   router.post('/add_record', function(req, res){
-    let kerberos = req.body.kerberos,
+    let kerberos = getKerberos(req),
         username = encodeURI(req.body.username); //encode to prevent injection
 
     console.log("Got request to add record:", req.body);
@@ -130,6 +206,7 @@ module.exports = (function(con) {
           kerberos,
           function(err, results, field) {
             if(err) {
+              console.log(err);
               res.sendStatus(HTTP_SERVER_ERROR);
             } else {
               if (results.length) {

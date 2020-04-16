@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>MIT Minecraft Authenticator</title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+
+  <div id="form-container">
+    <div>
+      <h3>MIT Minecraft Authenticator</h3>
+    </div>
+    <div id="form-box">
+      <div id="greeting">
+        Hello
+      </div>
+
+      <div id="new-registration">
+        <div>
+          Your kerberos is not currently associated with any Minecraft account.
+        </div>
+        <div>
+          If you wish to have build permission, please enter your Minecraft
+          username:
+        </div>
+      </div>
+
+      <div id="existing-registration">
+        <div>
+          Your kerberos is associated with Minecraft account: 
+        </div>
+        <div id="mc-username">
+        </div>
+        <div>
+          <button class='outline btn' onclick="showSubmissionForm(true)">
+            Edit
+          </button>
+        </div>
+      </div>
+
+      <div id="submission-form">
+          <input type="text" id="username-box" 
+          placeholder="Minecraft Username" maxlength="16"/>
+          <button class='outline btn' id="btn-submit" onclick="submitUsername()">
+            Submit
+          </button>
+      </div>
+      <div id="error-container">
+      </div>
+    </div>
+  </div>
+
+  <script src="control.js"></script>
+</body>
+
+</html>
