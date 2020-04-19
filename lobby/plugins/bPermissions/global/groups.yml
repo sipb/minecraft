@@ -1,0 +1,111 @@
+default: default
+groups:
+  trustedbuilder:
+    permissions:
+    - group.trustedbuilder
+    - minecraft.command.data
+    - minecraft.command.give
+    - minecraft.command.setblock
+    - ^group.builder
+    groups:
+    - builder
+  default:
+    permissions:
+    - antibuild.interact
+    - bukkit.broadcast.user
+    - easywarp.command.listwarps
+    - easywarp.command.warp
+    - minecraft.command.teleport
+    - simpleportals.portal.*
+    groups: []
+    meta:
+      prefix: '&9user'
+  build:
+    permissions: []
+    groups: []
+  defaualt:
+    permissions: []
+    groups: []
+  portalsbuilder:
+    permissions:
+    - simpleportals.create
+    - simpleportals.delete
+    - simpleportals.portal.*
+    - simpleportals.selectionmode
+    - simpleportals.setlocation
+    - simpleportals.showregion
+    - simpleportals.sl
+    - simpleportals.sm
+    - simpleportals.ss
+    - simpleportals.switchserver
+    groups: []
+  moderator:
+    permissions:
+    - group.moderator
+    - minecraft.command.gamerule
+    - minecraft.command.kick
+    - ^group.trustedbuilder
+    groups:
+    - trustedbuilder
+    meta:
+      prefix: '&7moderator'
+  builder:
+    permissions:
+    - antibuild.bypass
+    - group.builder
+    - minecraft.command.clear
+    - worldedit.*
+    - ^group.default
+    groups:
+    - default
+    - portalsbuilder
+    meta:
+      prefix: '&9user'
+  admin:
+    permissions:
+    - bPermissions.*
+    - bukkit.broadcast
+    - bukkit.broadcast.admin
+    - bukkit.command
+    - bukkit.command.help
+    - bukkit.command.plugins
+    - bukkit.command.reload
+    - bukkit.command.version
+    - craftbukkit
+    - d21fe6c2-3bbe-4572-bb62-d8e14dd5546d
+    - da68b042-222d-4c65-b3ed-6d9ac1331d0e
+    - e1ae97a0-49dc-4977-b662-79cf290d9eff
+    - group.admin
+    - minecraft
+    - minecraft.admin.command_feedback
+    - minecraft.command
+    - minecraft.command.defaultgamemode
+    - minecraft.command.effect
+    - minecraft.command.gamemode
+    - minecraft.command.give
+    - minecraft.command.help
+    - minecraft.command.kill
+    - minecraft.command.list
+    - minecraft.command.me
+    - minecraft.command.msg
+    - minecraft.command.say
+    - minecraft.command.seed
+    - minecraft.command.selector
+    - minecraft.command.stop
+    - minecraft.command.teleport
+    - minecraft.command.toggledownfall
+    - minecraft.command.trigger
+    - minecraft.command.xp
+    - minecraft.debugstick
+    - minecraft.debugstick.always
+    - minecraft.nbt.copy
+    - minecraft.nbt.place
+    - tracks.*
+    - ^group.moderator
+    groups:
+    - moderator
+    meta:
+      prefix: '&5admin'
+  pbuilder:
+    permissions: []
+    groups: []

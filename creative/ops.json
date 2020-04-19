@@ -1,0 +1,32 @@
+[
+  {
+    "uuid": "97359d1a-ca33-4233-971f-cfc758150e09",
+    "name": "sipb",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "e1ae97a0-49dc-4977-b662-79cf290d9eff",
+    "name": "CometsTech",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "02f9bb83-d532-4153-ac75-d0822480259f",
+    "name": "endermeap",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "7c759de5-8db0-48d1-b794-2fae8c1ea54d",
+    "name": "shaynaaa",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "dfb4c74a-3678-48e4-bd8c-1cef9aa6994b",
+    "name": "openatheclose",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  }
+]

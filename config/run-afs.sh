@@ -39,7 +39,7 @@ while [ $kstartret -ne 0 ]; do
     for dir in mitworld; do
         echo "Backing up $dir"
         rdiff-backup "$ROOT/$dir" "$BACKUP_ROOT/$dir" || echo "Failed to backup"
-        rdiff-backup --force --remove-older-than "$RETENTION" "$BACKUP_ROOT/$dir" >/dev/null || "Failed to purge old backups"
+        #rdiff-backup --force --remove-older-than "$RETENTION" "$BACKUP_ROOT/$dir" >/dev/null || "Failed to purge old backups"
         echo "Done Backing up $dir"
     done
 
