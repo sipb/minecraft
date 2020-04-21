@@ -7,17 +7,25 @@
 var fcgi = require('node-fastcgi');
 
 const express = require('express'),
-      app = express(),
-      appHTTP = express(), // supports serving unsecured public page
+      app = express(), // supports serving unsecured public page
       fs = require('fs'),
-//      http = fcgi.createServer(appHTTP),
-      http = require('http'),
-      https = require('https'),
+      http = fcgi.createServer(app),
+      util = require('util'),
       morgan = require('morgan');
       bodyParser = require('body-parser'),
       sql = require('mysql');
 
 const config = JSON.parse(fs.readFileSync('config.json', "utf8"));
+
+// log to a file
+const log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'}),
+      log_stdout = process.stdout;
+
+console.log = function(d) {
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+}
+
 
 const con = sql.createConnection({
   host     : config.SQL_HOST,
@@ -26,30 +34,25 @@ const con = sql.createConnection({
   database : config.SQL_DB_NAME_TEST
 });
 
-const credentials = {
-  key: fs.readFileSync(config.PRIVATE_KEY, 'utf8'),
-  cert: fs.readFileSync(config.CERT, 'utf8'),
-  ca: fs.readFileSync(config.CA, 'utf8'),
-  requestCert: true,
-  rejectUnauthorized: true
-};
-
-const httpServer = http.createServer(appHTTP),
-      httpsServer = https.createServer(credentials, app)
-
 // Users route, interface for all user DB interactions
 const users = require('./users.js')(con);
 
-// the public page, no cert required
-appHTTP.use(express.static('views/public'));
-
-// the private page/form, requires cert and HTTPS
-app.use(express.static('views/private'));
-app.use(morgan(config.LOG_LEVEL));
-// serve HTML from views directory
+//app.use(morgan(config.LOG_LEVEL, {stream : log_file));
 app.use(bodyParser.json());
-// all client calls to /user will go to users module
-app.use('/users', users); 
+// anyone can see the public director
+app.use('/', express.static('views/public'));
+
+// middleware to prevent people without valid MIT certs to app
+function requireKerberos(req, res, next) {
+  if ('SSL_CLIENT_S_DN_Email' in req.socket.params) {
+    next();
+  } else {
+    res.send("Please log in with your MIT certificate at" +
+      "https://minecraft.scripts.mit.edu:444");
+  }
+}
+  
+app.use('/users', requireKerberos, express.static('views/private')); 
 
 // handle errors, respond to client
 app.use((err, req, res, next) => {
@@ -67,6 +70,7 @@ con.connect(function(err){
 // Ugly but keeps the connection persistent by avoiding idle
 setInterval(function(){
   con.query('SELECT 1');
+  consoel.log('refresh');
 }, 10000);
 
 con.on('error', function(err){
@@ -74,12 +78,5 @@ con.on('error', function(err){
   throw err;
 });
 
-//http.listen();
 
-httpServer.listen(
-  config.HTTP_PORT, 
-  console.log("Server started, accepting requests on port:", 
-  config.HTTP_PORT)
-);
-
-httpsServer.listen(config.HTTPS_PORT);
+http.listen();

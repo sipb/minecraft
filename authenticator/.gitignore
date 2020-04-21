@@ -10,3 +10,4 @@ config.json
 
 # Other stuff
 *.swp
+*.log
