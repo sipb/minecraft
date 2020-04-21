@@ -74,8 +74,7 @@ module.exports = (function(con) {
    * Helper function to get kerberos
    */
   function getKerberos(req) {
-    const subject = req.socket.getPeerCertificate().subject,
-          kerberos = subject.emailAddress.split("@")[0];
+    const kerberos = req.socket.params['SSL_CLIENT_S_DN_Email'].split("@")[0];
     return kerberos;
   }
 

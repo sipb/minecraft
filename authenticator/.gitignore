@@ -11,3 +11,5 @@ config.json
 # Other stuff
 *.swp
 *.log
+.htaccess
+.htaccess.mit

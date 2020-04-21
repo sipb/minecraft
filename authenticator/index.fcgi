@@ -29,9 +29,9 @@ console.log = function(d) {
 
 const con = sql.createConnection({
   host     : config.SQL_HOST,
-  user     : config.SQL_USER_TEST,
-  password : config.SQL_PASSWORD_TEST,
-  database : config.SQL_DB_NAME_TEST
+  user     : config.SQL_USER,
+  password : config.SQL_PASSWORD,
+  database : config.SQL_DB_NAME
 });
 
 // Users route, interface for all user DB interactions
@@ -52,7 +52,7 @@ function requireKerberos(req, res, next) {
   }
 }
   
-app.use('/users', requireKerberos, express.static('views/private')); 
+app.use('/users', requireKerberos, express.static('views/private'), users);
 
 // handle errors, respond to client
 app.use((err, req, res, next) => {
