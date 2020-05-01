@@ -1,0 +1,305 @@
+=== Base colors ===
+Blocks are colored according to their material. Each material has a base color which is multiplied by 135, 180, 220 or 255, and then divided by 255 to make the map color. Each base color below is associated with four map colors - to get the first map color ID for a base color, multiply the base color ID by 4.<!--Every block on this list is kept up to data in Java. However, there may be some new blocks that aren't on the list.-->
+{{/header|
+
+
+{{/entry
+| id = 1 GRASS
+| rgb = 127, 178, 56
+| blocks = [[Grass Block]], [[Slime Block]]
+}}
+
+{{/entry
+| id = 2 SAND
+| rgb = 247, 233, 163
+| blocks = [[Sand]], Birch ([[Planks]], [[Log]] (vertical), [[Stripped Log]], [[Wood]], [[Stripped Wood]], [[Sign]], [[Pressure Plate]], [[Trapdoor]], [[Stairs]], [[Slab]], [[Fence Gate]], [[Fence]], [[Door]]), [[Sandstone]] (All variants, all slabs, all stairs, all walls), [[Glowstone]], [[End Stone]], [[End Stone Bricks]] (slab, stairs, wall), [[Bone Block]], [[Turtle Egg]], [[Scaffolding]]
+}}
+
+{{/entry
+| id = 3 WOOL
+| rgb = 199, 199, 199
+| blocks = [[Cobweb]], [[Mushroom Stem]], [[Bed]] (head)
+}}
+
+{{/entry
+| id = 4 FIRE
+| rgb = 255, 0, 0
+| blocks = [[Lava]], [[TNT]], [[Fire]], [[Redstone Block]]
+}}
+
+{{/entry
+| id = 5 ICE
+| rgb = 160, 160, 255
+| blocks = [[Ice]], [[Frosted Ice]], [[Packed Ice]], [[Blue Ice]]
+}}
+
+{{/entry
+| id = 6 METAL
+| rgb = 167, 167, 167
+| blocks = [[Block of Iron]], [[Iron Door]], [[Brewing Stand]], [[Heavy Weighted Pressure Plate]], [[Iron Trapdoor]], [[Lantern]], [[Anvil]], [[Grindstone]], [[Soul Fire Lantern]]{{upcoming|Java 1.16}}
+}}
+
+{{/entry
+| id = 7 PLANT
+| rgb = 0, 124, 0
+| blocks = [[Sapling]], [[Flower]]s, [[Mushroom]]s,{{until|Java 1.16}} [[Wheat Seeds|Wheat]], [[Sugar Cane]], [[Pumpkin Stem]], [[Melon Stem]], [[Lily Pad]], [[Cocoa]], [[Carrots]], [[Potatoes]], [[Beetroots]], [[Sweet Berry Bush]], [[Grass]], [[Fern]], [[Vines]], [[Leaves]], [[Cactus]], [[Bamboo]], [[Fungi]], [[Weeping Vines]]
+}}
+
+{{/entry
+| id = 8 SNOW
+| rgb = 255, 255, 255
+| blocks = [[Snow]], [[Snow Block]], White ([[Bed]] (foot), [[Wool]], [[Stained Glass]], [[Stained Glass Pane]], [[Carpet]], [[Banner]], [[Shulker Box]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]])
+}}
+
+{{/entry
+| id = 9 CLAY
+| rgb = 164, 168, 184
+| blocks = [[Clay]], [[Infested Block]] (Stone, Cobblestone, Stone Brick, Mossy Stone Brick, Cracked Stone Brick, Chiseled Stone Brick)
+}}
+
+{{/entry
+| id = 10 DIRT
+| rgb = 151, 109, 77
+| blocks = [[Dirt]], [[Coarse Dirt]], [[Farmland]], [[Grass Path]], [[Granite]] (slab, stairs, wall), [[Polished Granite]] (slab, stairs), Jungle ([[Planks]], [[Log]] (vertical), [[Stripped Log]], [[Wood]], [[Stripped Wood]], [[Sign]], [[Pressure Plate]], [[Trapdoor]], [[Stairs]], [[Slab]], [[Fence Gate]], [[Fence]], [[Door]]), [[Jukebox]], [[Brown Mushroom Block]]
+}}
+
+{{/entry
+| id = 11 STONE
+| rgb = 112, 112, 112
+| blocks = [[Stone]] ([[slab]], [[stairs]]), [[Andesite]] (slab, stairs, wall), [[Polished Andesite]] (slab, stairs), [[Cobblestone]] (slab, stairs), [[Bedrock]], [[Gold Ore]], [[Iron Ore]], [[Coal Ore]], [[Lapis Lazuli Ore]], [[Dispenser]], [[Mossy Cobblestone]] (slab, stairs, wall), [[Spawner]], [[Diamond Ore]], [[Furnace]], [[Stone Pressure Plate]], [[Redstone Ore]], [[Stone Bricks]] (all variants, all slabs, all stairs, all walls), [[Emerald Ore]], [[Ender Chest]], [[Dropper]], [[Smooth Stone]] (slab, stairs), [[Observer]], [[Smoker]], [[Blast Furnace]], [[Stonecutter]], [[Sticky Piston]], [[Piston]], [[Piston Head]], [[Gravel]], Acacia [[Log]] (side), [[Cauldron]], [[Hopper]]
+}}
+
+{{/entry
+| id = 12 WATER
+| rgb = 64, 64, 255
+| blocks = [[Kelp]], [[Seagrass]], [[Water]], [[Bubble Column]]
+}}
+
+{{/entry
+| id = 13 WOOD
+| rgb = 143, 119, 72
+| blocks = Oak ([[Planks]], [[Log]] (vertical), [[Stripped Log]], [[Wood]], [[Stripped Wood]], [[Sign]], [[Door]], [[Pressure Plate]], [[Fence]], [[Trapdoor]], [[Fence Gate]], [[Slab]], [[Stairs]]), [[Note Block]], [[Bookshelf]], [[Chest]], [[Crafting Table]], [[Trapped Chest]], [[Daylight Detector]], [[Loom]], [[Barrel]], [[Cartography Table]], [[Fletching Table]], [[Lectern]], [[Smithing Table]], [[Composter]], [[Bamboo Sapling]], [[Dead Bush]], [[Petrified Oak Slab]], [[Beehive]], [[Bee Nest]]
+}}
+
+{{/entry
+| id = 15 COLOR_ORANGE
+| rgb = 216, 127, 51
+| blocks = Acacia ([[Planks]], [[Log]] (vertical), [[Stripped Log]], [[Stripped Wood]], [[Sign]], [[Trapdoor]], [[Slab]]), [[Red Sand]], Orange ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Pumpkin]], [[Carved Pumpkin]], [[Jack o'Lantern]], [[Terracotta]], [[Red Sandstone]] (all variants, all stairs, all slabs, all walls), [[Honey Block]], [[Honeycomb Block]]
+}}
+
+{{/entry
+| id = 16 COLOR_MAGENTA
+| rgb = 178, 76, 216
+| blocks = Magenta ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Purpur]] (all variants, slab, stairs)
+}}
+
+{{/entry
+| id = 17 COLOR_LIGHT_BLUE
+| rgb = 102, 153, 216
+| blocks = Light Blue ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Soul Fire]]{{upcoming|Java 1.16}}
+}}
+
+{{/entry
+| id = 18 COLOR_YELLOW
+| rgb = 229, 229, 51
+| blocks = [[Sponge]], [[Wet Sponge]], Yellow ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Hay Bale]], Horn Coral ([[Coral Block]], [[Coral]], [[Coral Fan]])
+}}
+
+{{/entry
+| id = 19 COLOR_LIGHT_GREEN
+| rgb = 127, 204, 25
+| blocks = Lime ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Melon]]
+}}
+
+{{/entry
+| id = 20 COLOR_PINK
+| rgb = 242, 127, 165
+| blocks = Pink ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), Brain Coral ([[Coral Block]], [[Coral]], [[Coral Fan]])
+}}
+
+{{/entry
+| id = 21 COLOR_GRAY
+| rgb = 76, 76, 76
+| blocks = Acacia [[Wood]], Gray ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), Dead Coral ([[Coral Block]], [[Coral]], [[Coral Fan]])
+}}
+
+{{/entry
+| id = 22 COLOR_LIGHT_GRAY
+| rgb = 153, 153, 153
+| blocks = Light Gray ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Structure Block]], [[Jigsaw Block]]
+}}
+
+{{/entry
+| id = 23 COLOR_CYAN
+| rgb = 76, 127, 153
+| blocks = Cyan ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Prismarine]] (slab, stairs, wall), Warped ([[Stem]], [[Stripped Stem]], [[Hyphae]], [[Stripped Hyphae]], [[Nylium]], [[Warped Wart Block|Wart Block]], [[Roots]], [[Planks]], [[Slab]], [[Pressure Plate]], [[Fence]], [[Trapdoor]], [[Fence Gate]], [[Stairs]], [[Door]], [[Sign]]), [[Nether Sprouts]]
+}}
+
+{{/entry
+| id = 24 COLOR_PURPLE
+| rgb = 127, 63, 178
+| blocks = [[Shulker Box]], Purple ([[Wool]], [[Carpet]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Mycelium]], [[Chorus Plant]], [[Chorus Flower]], [[Repeating Command Block]], Bubble Coral ([[Coral Block]], [[Coral]], [[Coral Fan]])
+}}
+
+{{/entry
+| id = 25 COLOR_BLUE
+| rgb = 51, 76, 178
+| blocks = Blue ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), Tube Coral ([[Coral Block]], [[Coral]], [[Coral Fan]])
+}}
+
+{{/entry
+| id = 26 COLOR_BROWN
+| rgb = 102, 76, 51
+| blocks = Dark Oak ([[Planks]], [[Log]], [[Stripped Log]], [[Wood]], [[Stripped Wood]], [[Sign]], [[Pressure Plate]], [[Trapdoor]], [[Stairs]], [[Slab]], [[Fence Gate]], [[Fence]], [[Door]]), Spruce [[Log]] (side), Brown ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Soul Sand]], [[Command Block]], [[Brown Mushroom]]{{upcoming|Java 1.16}}, [[Soul Soil]]{{upcoming|Java 1.16}}
+}}
+
+{{/entry
+| id = 27 COLOR_GREEN
+| rgb = 102, 127, 51
+| blocks = Green ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[End Portal Frame]], [[Chain Command Block]], [[Dried Kelp Block]], [[Sea Pickle]]
+}}
+
+{{/entry
+| id = 28 COLOR_RED
+| rgb = 153, 51, 51
+| blocks = Red ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Bricks]] (slab, stairs, wall), [[Red Mushroom Block]], [[Nether Wart]], [[Enchanting Table]], [[Nether Wart Block]], Fire Coral ([[Coral Block]], [[Coral]], [[Coral Fan]]), [[Red Mushroom]],{{upcoming|Java 1.16}} Crimson ([[Stem]], [[Stripped Stem]], [[Hyphae]], [[Stripped Hyphae]], [[Nylium]]), [[Shroomlight]]
+}}
+
+{{/entry
+| id = 29 COLOR_BLACK
+| rgb = 25, 25, 25
+| blocks = Black ([[Wool]], [[Carpet]], [[Shulker Box]], [[Bed]] (foot), [[Stained Glass]], [[Stained Glass Pane]], [[Banner]], [[Glazed Terracotta]], [[Concrete]], [[Concrete Powder]]), [[Obsidian]], [[End Portal]], [[Dragon Egg]], [[Coal Block]], [[End Gateway]], [[Basalt]],{{upcoming|Java 1.16}} [[Block of Netherite]], [[Ancient Debris]], [[Crying Obsidian]]
+}}
+
+{{/entry
+| id = 30 GOLD
+| rgb = 250, 238, 77
+| blocks = [[Block of Gold]], [[Light Weighted Pressure Plate]], [[Bell]]
+}}
+
+{{/entry
+| id = 31 DIAMOND
+| rgb = 92, 219, 213
+| blocks = [[Block of Diamond]], [[Beacon]], [[Prismarine Bricks]] (slab, stairs), [[Dark Prismarine]] (slab, stairs), [[Conduit]]
+}}
+
+{{/entry
+| id = 32 LAPIS
+| rgb = 74, 128, 255
+| blocks = [[Lapis Lazuli Block]]
+}}
+
+{{/entry
+| id = 33 EMERALD
+| rgb = 0, 217, 58
+| blocks = [[Block of Emerald]]
+}}
+
+{{/entry
+| id = 34 PODZOL
+| rgb = 129, 86, 49
+| blocks = [[Podzol]], Spruce ([[Planks]], [[Log]] (vertical), [[Stripped Log]], [[Wood]], [[Stripped Wood]], [[Sign]], [[Pressure Plate]], [[Trapdoor]], [[Stairs]], [[Slab]], [[Fence Gate]], [[Fence]], [[Door]]), Oak [[Log]] (side), Jungle [[Log]] (side), [[Campfire]]
+}}
+
+{{/entry
+| id = 35 NETHER
+| rgb = 112, 2, 0
+| blocks = [[Netherrack]], [[Nether Bricks]] (fence, slab, stairs, wall), [[Nether Quartz Ore]], [[Magma Block]], [[Red Nether Bricks]] (slab, stairs, wall), Crimson ([[Roots]], [[Planks]], [[Slab]], [[Pressure Plate]], [[Fence]], [[Trapdoor]], [[Fence Gate]], [[Stairs]], [[Door]], [[Sign]])
+}}
+
+{{/entry
+| id = 36 TERRACOTTA_WHITE
+| rgb = 209, 177, 161
+| blocks = White [[Terracotta]]
+}}
+
+{{/entry
+| id = 37 TERRACOTTA_ORANGE
+| rgb = 159, 82, 36
+| blocks = Orange [[Terracotta]]
+}}
+
+{{/entry
+| id = 38 TERRACOTTA_MAGENTA
+| rgb = 149, 87, 108
+| blocks = Magenta [[Terracotta]]
+}}
+
+{{/entry
+| id = 39 TERRACOTTA_LIGHT_BLUE
+| rgb = 112, 108, 138
+| blocks = Light Blue [[Terracotta]]
+}}
+
+{{/entry
+| id = 40 TERRACOTTA_YELLOW
+| rgb = 186, 133, 36
+| blocks = Yellow [[Terracotta]]
+}}
+
+{{/entry
+| id = 41 TERRACOTTA_LIGHT_GREEN
+| rgb = 103, 117, 53
+| blocks = Lime [[Terracotta]]
+}}
+
+{{/entry
+| id = 42 TERRACOTTA_PINK
+| rgb = 160, 77, 78
+| blocks = Pink [[Terracotta]]
+}}
+
+{{/entry
+| id = 43 TERRACOTTA_GRAY
+| rgb = 57, 41, 35
+| blocks = Gray [[Terracotta]]
+}}
+
+{{/entry
+| id = 44 TERRACOTTA_LIGHT_GRAY
+| rgb = 135, 107, 98
+| blocks = Light Gray [[Terracotta]]
+}}
+
+{{/entry
+| id = 45 TERRACOTTA_CYAN
+| rgb = 87, 92, 92
+| blocks = Cyan [[Terracotta]]
+}}
+
+{{/entry
+| id = 46 TERRACOTTA_PURPLE
+| rgb = 122, 73, 88
+| blocks = Purple ([[Terracotta]], [[Shulker Box]])
+}}
+
+{{/entry
+| id = 47 TERRACOTTA_BLUE
+| rgb = 76, 62, 92
+| blocks = Blue [[Terracotta]]
+}}
+
+{{/entry
+| id = 48 TERRACOTTA_BROWN
+| rgb = 76, 50, 35
+| blocks = Brown [[Terracotta]]
+}}
+
+{{/entry
+| id = 49 TERRACOTTA_GREEN
+| rgb = 76, 82, 42
+| blocks = Green [[Terracotta]]
+}}
+
+{{/entry
+| id = 50 TERRACOTTA_RED
+| rgb = 142, 60, 46
+| blocks = Red [[Terracotta]]
+}}
+
+{{/entry
+| id = 51 TERRACOTTA_BLACK
+| rgb = 37, 22, 16
+| blocks = Black [[Terracotta]]
+}}
+}}
