@@ -7,7 +7,6 @@
 #Created 4/30/2020
 
 input_filename = 'rsz_wednesdayfrog.jpg'
-palette_file = 'colortable.txt'
 #There are three possible outputs:
 #1. Render an image of what your map will look like after converting to blocks, showing and saving it
 #2. Output a list of blocks to build by hand
@@ -15,6 +14,8 @@ palette_file = 'colortable.txt'
 show_image = False
 write_list = False
 make_schematic = True
+
+palette_file = 'colortable.txt'
 #Class which represents a given color, for keeping track of palette
 class Mapcolor:
     def __init__(self,name,r,g,b):
@@ -85,7 +86,8 @@ im = Image.open(input_filename).convert('RGB')
 Lab = ImageCms.applyTransform(im,rgb2lab)
 lab_pix = Lab.load()
 width,height = im.size
-print(im.size)
+print("Image size is: " + str(im.size))
+print("If it's not 128x128, all bets are off! This script is made for 128x128.")
 
 #Output_image stores a pixel representation of your palettized image.
 output_image = Image.new("RGB",(width,height))
@@ -154,3 +156,4 @@ if(make_schematic):
             sf.blocks[0,y,x] = name_to_id[block_name][0]
             sf.data[0,y,x] = name_to_id[block_name][1]
     sf.save('output.schematic')
+print("Map maker complete!")

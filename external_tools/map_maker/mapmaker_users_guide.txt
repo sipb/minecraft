@@ -1,0 +1,41 @@
+Mapmaker User's Guide (made by tjmurphy@mit.edu)
+
+mapmaker.py contains everything you need to make a Minecraft map template!
+
+Take whatever image you want (needs to be 128x128 pixels!!!) and save it into the same folder as the mapmaker.py file.
+
+At the top of the file are all the settings you should need to mess with. input_filename is the
+file name for the image you want to make a map out of. Under that are three settings. I recommend enabling show_image,
+to make sure that your image is still recognizable after the map-generating process, and enabling make_schematic,
+which will create a file ("output.schematic") which holds the blocks that result from creating your image. Run the file,
+and it will print out how the image loaded up in size. It should give you 128x128. 
+
+(Note: The programming is actually made to be flexible, 128x128 isn't hard-coded anywhere. But that's the size of a map
+so it's probably what you want. If you wanted to make a bigger wall of tesselated maps, you could likely go 512x256 or
+anything else, but no promises. Script has only been tested for 128x128)
+
+Once you have the schematic file, if you want to paste it in the MIT Minecraft world, you'll need to first put it onto the
+server. First, rename your schematic file from "output.schematic" to something meaningful. I first tested this with
+frog.schematic, so I'll use that.
+
+On your local machine, open a terminal and navigate to the directory holding frog.schematic. 
+Then, securely copy the file to the game server by using the following command:
+
+scp -P {PORT_NUMBER} frog.schematic {SERVER ADDRESS}:~/creative/plugins/WorldEdit/schematics/
+
+Port number and server address have been redacted. Ask Billy for these if you need a reminder.
+Also, note that this is assuming your SSH key is on the server, that's also something you may need to set up.
+
+After running the scp command above, your schematic file is now on the server! Go into the game, and place your game character
+on the farthest northwest corner of the area you want to place the map into. Then, in the in-game console, do the command:
+
+//schem load frog
+
+followed by
+
+//paste
+
+This will invoke WorldEdit to paste your frog (or whatever your schematic is called) into the world. It loads based on filename,
+so make sure you're consistent.
+
+That should cover it! Email me or message on Discord or in-game (openatheclose) with any questions :)
