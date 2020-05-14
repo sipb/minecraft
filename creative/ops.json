@@ -1,5 +1,11 @@
 [
   {
+    "uuid": "a3bde009-e8a8-4c3d-b26b-aba4fb2d6e04",
+    "name": "fatterchick3",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
     "uuid": "97359d1a-ca33-4233-971f-cfc758150e09",
     "name": "sipb",
     "level": 4,

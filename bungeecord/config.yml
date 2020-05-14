@@ -1,4 +1,4 @@
-server_connect_timeout: 5000
+prevent_proxy_connections: false
 listeners:
 - query_port: 25565
   motd: MITcraft Lobby
@@ -16,6 +16,7 @@ listeners:
   force_default_server: false
   forced_hosts:
     pvp.md-5.net: lobby
+    minecraft-tours.mit.edu: tours
 remote_ping_cache: -1
 network_compression_threshold: 256
 permissions:
@@ -29,7 +30,7 @@ permissions:
   - bungeecord.command.reload
 log_pings: true
 connection_throttle_limit: 3
-prevent_proxy_connections: false
+server_connect_timeout: 5000
 timeout: 30000
 player_limit: -1
 ip_forward: true

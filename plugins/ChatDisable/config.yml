@@ -1,0 +1,9 @@
+command-disable-chat: '&7The chat has been &cdisabled'
+command-enable-chat: '&7The chat has been &aenable'
+no-permission: '&cYou dont have permission to chat! If this is wrong, email sipb-minecraft@mit.edu'
+text: '&6[&bChat&6] &7The chat is disabled.'
+lines-to-clear: 100
+end-clear: '&6Chat delete by Staff.'
+Broadcast-prefix: '&4[&bAlert&4] &a'
+chat:
+  status: true
